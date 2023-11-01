@@ -9,7 +9,9 @@ public interface UserDao {
    void add(User user, Car car);
    List<User> listUsers();
 
-   List<User> userByCarModel(String model);
+   List<User> usersByCarModel(String model);
 
-   List<User> userByCarSeries(int series);
+   List<User> usersByCarSeries(int series);
+
+   List<User> usersByCar(String model, int series);
 }

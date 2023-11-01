@@ -25,10 +25,11 @@ public class User {
 
    public User() {}
    
-   public User(String firstName, String lastName, String email) {
+   public User(String firstName, String lastName, String email, Car car) {
       this.firstName = firstName;
       this.lastName = lastName;
       this.email = email;
+      this.car = car;
    }
 
    public Long getId() {
@@ -73,6 +74,6 @@ public class User {
 
    @Override
    public String toString() {
-      return getFirstName()+ " " + getLastName();
+      return getFirstName()+ " " + getLastName() + " " + getEmail() + " " + getCar();
    }
 }
