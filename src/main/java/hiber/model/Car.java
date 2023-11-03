@@ -1,10 +1,7 @@
 package hiber.model;
 
-import org.springframework.stereotype.Component;
-
 import javax.persistence.*;
 
-@Component
 @Entity
 @Table(name = "cars")
 public class Car {
@@ -18,6 +15,9 @@ public class Car {
 
     @Column(name = "series")
     private int series;
+
+    @OneToOne(mappedBy = "car")
+    private User owner;
 
     public Car() {}
 
@@ -48,6 +48,14 @@ public class Car {
 
     public void setSeries(int series) {
         this.series = series;
+    }
+
+    public User getOwner() {
+        return this.owner;
+    }
+
+    public void setOwner(User owner) {
+        this.owner = owner;
     }
 
     @Override
