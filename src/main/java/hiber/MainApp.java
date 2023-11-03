@@ -25,10 +25,10 @@ public class MainApp {
       User user3 = new User("User3", "Lastname3", "user3@mail.ru", car3);
       User user4 = new User("User4", "Lastname4", "user4@mail.ru", car4);
 
-      userService.add(user1, car1);
-      userService.add(user2, car2);
-      userService.add(user3, car3);
-      userService.add(user4, car4);
+      userService.addUserWithCar(user1, car1);
+      userService.addUserWithCar(user2, car2);
+      userService.addUserWithCar(user3, car3);
+      userService.addUserWithCar(user4, car4);
 
       List<User> users = userService.listUsers();
       users.forEach(System.out::println);

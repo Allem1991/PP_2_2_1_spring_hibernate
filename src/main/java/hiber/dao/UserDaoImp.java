@@ -16,21 +16,21 @@ public class UserDaoImp implements UserDao {
    private SessionFactory sessionFactory;
 
    @Override
-   public void add(User user, Car car) {
+   public void addUserWithCar(User user, Car car) {
       sessionFactory.getCurrentSession().save(user);
       sessionFactory.getCurrentSession().save(car);
    }
 
    @Override
    public List<User> listUsers() {
-      TypedQuery<User> query=sessionFactory.getCurrentSession().createQuery("from User u");
+      TypedQuery<User> query= sessionFactory.getCurrentSession().createQuery("from User u", User.class);
       return query.getResultList();
    }
 
    @Override
    public List<User> usersByCarModel(String model) {
       String hql = "FROM User u where u.car.model = :model_name";
-      TypedQuery<User> query = sessionFactory.getCurrentSession().createQuery(hql);
+      TypedQuery<User> query = sessionFactory.getCurrentSession().createQuery(hql, User.class);
       query.setParameter("model_name", model);
       return query.getResultList();
    }
@@ -38,7 +38,7 @@ public class UserDaoImp implements UserDao {
    @Override
    public List<User> usersByCarSeries(int series) {
       String hql = "FROM User u where u.car.series = :series_value";
-      TypedQuery<User> query = sessionFactory.getCurrentSession().createQuery(hql);
+      TypedQuery<User> query = sessionFactory.getCurrentSession().createQuery(hql, User.class);
       query.setParameter("series_value", series);
       return query.getResultList();
    }
@@ -46,7 +46,7 @@ public class UserDaoImp implements UserDao {
    @Override
    public List<User> usersByCar(String model, int series) {
       String hql = "FROM User u WHERE u.car.model = :model_name AND u.car.series = :series_value";
-      TypedQuery<User> query = sessionFactory.getCurrentSession().createQuery(hql);
+      TypedQuery<User> query = sessionFactory.getCurrentSession().createQuery(hql, User.class);
       query.setParameter("model_name", model);
       query.setParameter("series_value", series);
       return query.getResultList();
