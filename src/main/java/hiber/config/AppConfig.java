@@ -3,10 +3,7 @@ package hiber.config;
 import hiber.model.Car;
 import hiber.model.User;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.ComponentScan;
-import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.PropertySource;
+import org.springframework.context.annotation.*;
 import org.springframework.core.env.Environment;
 import org.springframework.jdbc.datasource.DriverManagerDataSource;
 import org.springframework.orm.hibernate5.HibernateTransactionManager;
@@ -25,6 +22,9 @@ public class AppConfig {
 
    @Autowired
    private Environment env;
+   private static int userNumber = 1;
+   private static int carNumber = 3;
+
 
    @Bean
    public DataSource getDataSource() {
@@ -55,6 +55,24 @@ public class AppConfig {
       HibernateTransactionManager transactionManager = new HibernateTransactionManager();
       transactionManager.setSessionFactory(getSessionFactory().getObject());
       return transactionManager;
+   }
+
+   @Bean
+   @Scope("prototype")
+   public Car getCarBMW3() {
+      Car car = new Car("BMW", carNumber);
+      carNumber++;
+      return car;
+   }
+
+   @Bean
+   @Scope("prototype")
+   public User getUser(@Autowired Car car) {
+      String name = "User" + userNumber;
+      String lastname = "Lastname" + userNumber;
+      String email = "user" + userNumber + "@mail.ru";
+      userNumber++;
+      return new User(name, lastname, email, car);
    }
 
 }
