@@ -1,12 +1,7 @@
 package hiber.model;
 
-import org.springframework.context.annotation.Scope;
-import org.springframework.stereotype.Component;
-
 import javax.persistence.*;
 
-@Component
-@Scope("prototype")
 @Entity
 @Table(name = "cars")
 public class Car {
